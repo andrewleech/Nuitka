@@ -230,5 +230,10 @@ setup(
 Python compiler with full language support and CPython compatibility""",
     keywords     = "compiler,python,nuitka",
     entry_points = {"console_scripts": ['nuitka = nuitka.__main__',
-                                        'nuitka-run = nuitka.__main__']},
+                                        'nuitka-run = nuitka.__main__'],
+                    "distutils.commands": [
+                            'bdist_nuitka = \
+                             nuitka.distutils.bdist_nuitka:bdist_nuitka'
+                        ]
+                   },
 )
