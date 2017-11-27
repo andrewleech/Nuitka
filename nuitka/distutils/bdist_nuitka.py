@@ -67,13 +67,9 @@ class bdist_nuitka(wheel.bdist_wheel.bdist_wheel):
         assert finding == "absolute", finding
         assert package is None, package
 
-        nuitka_binary = getExecutablePath("nuitka")
-        if nuitka_binary is None:
-            sys.exit("Error, cannot find nuitka binary in PATH.")
-
         command = [
             sys.executable,
-            nuitka_binary,
+            "-m", "nuitka",
             "--module",
             "--plugin-enable=pylint-warnings",
             "--output-dir=%s" % build_lib,
