@@ -21,6 +21,7 @@ import sys
 import re
 from setuptools import setup
 from setuptools.command import easy_install
+import setuptools_scm
 
 os.chdir(os.path.dirname(__file__) or '.')
 
@@ -31,21 +32,9 @@ if os.name == "nt":
     scripts += ["misc/nuitka.bat", "misc/nuitka-run.bat"]
 
 
-# Detect the version of Nuitka from its source directly. Without calling it, we
-# don't mean to pollute with ".pyc" files and similar effects.
-def detectVersion():
-    with open("nuitka/Version.py") as version_file:
-        version_line, = [
-            line
-            for line in
-            version_file
 
-            if line.startswith("Nuitka V")
-        ]
-
-        return version_line.split('V')[1].strip()
-
-version = detectVersion()
+# Detect the version of Nuitka from git directly.
+version = setuptools_scm.get_version()
 
 # The MSI installer enforces a 3 digit version number, which is stupid, but no
 # way around it, so we map our number to it, in some way.
